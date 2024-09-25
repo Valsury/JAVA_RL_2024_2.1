@@ -27,6 +27,7 @@ public class Main {
 
         RandomNumbers randomNumbers = new RandomNumbers();
         randomNumbers.generateRandomNumbers();
+
         System.out.println("\n");
         Main main = new Main();
 
@@ -38,5 +39,36 @@ public class Main {
 
         System.out.println("Дата после установки времени:");
         main.displayDate();
+
+        System.out.println("\n");
+        int[] numbers = new int[100000];
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = (int) (Math.random() * 100000);
+        }
+
+        StopWatch stopWatch = new StopWatch();
+
+        stopWatch.start();
+
+        selectionSort(numbers);
+
+        stopWatch.stop();
+
+        System.out.println("Время выполнения сортировки: " + stopWatch.getElapsedTime() + " миллисекунд");
+    }
+
+    public static void selectionSort(int[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[j] < array[minIndex]) {
+                    minIndex = j;
+                }
+            }
+
+            int temp = array[minIndex];
+            array[minIndex] = array[i];
+            array[i] = temp;
+        }
     }
 }
